@@ -12,6 +12,8 @@
 		745C3ADE1D927242006435F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 745C3ADC1D927242006435F7 /* Main.storyboard */; };
 		745C3AE01D927242006435F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 745C3ADF1D927242006435F7 /* Assets.xcassets */; };
 		745C3AE31D927242006435F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 745C3AE11D927242006435F7 /* LaunchScreen.storyboard */; };
+		745C3AEC1D9285C2006435F7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 745C3AEB1D9285C2006435F7 /* CoreLocation.framework */; };
+		745C3AF01D9289B5006435F7 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 745C3AEE1D9289B5006435F7 /* UserNotifications.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,9 @@
 		745C3ADF1D927242006435F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		745C3AE21D927242006435F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		745C3AE41D927242006435F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		745C3AEB1D9285C2006435F7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		745C3AED1D9289B5006435F7 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		745C3AEE1D9289B5006435F7 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +34,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				745C3AF01D9289B5006435F7 /* UserNotifications.framework in Frameworks */,
+				745C3AEC1D9285C2006435F7 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +47,7 @@
 			children = (
 				745C3AD71D927242006435F7 /* KiiBeacon */,
 				745C3AD61D927242006435F7 /* Products */,
+				745C3AEA1D9285C2006435F7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +70,16 @@
 				745C3AE41D927242006435F7 /* Info.plist */,
 			);
 			path = KiiBeacon;
+			sourceTree = "<group>";
+		};
+		745C3AEA1D9285C2006435F7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				745C3AED1D9289B5006435F7 /* NotificationCenter.framework */,
+				745C3AEE1D9289B5006435F7 /* UserNotifications.framework */,
+				745C3AEB1D9285C2006435F7 /* CoreLocation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +114,7 @@
 				TargetAttributes = {
 					745C3AD41D927242006435F7 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = N5QLD3RVE2;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -203,7 +222,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -247,7 +266,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -260,6 +279,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = N5QLD3RVE2;
 				INFOPLIST_FILE = KiiBeacon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Kii.KiiBeacon;
@@ -272,6 +292,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = N5QLD3RVE2;
 				INFOPLIST_FILE = KiiBeacon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Kii.KiiBeacon;

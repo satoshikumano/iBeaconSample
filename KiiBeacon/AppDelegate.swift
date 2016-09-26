@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        registerNotification(application: application)
         return true
     }
 
@@ -41,6 +43,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func registerNotification(application:UIApplication) {
+        if #available(iOS 10.0, *) {
+            let action = UNNotificationAction(identifier: "launch", title: "Launch app", options: [UNNotificationActionOptions.foreground])
+            let category = UNNotificationCategory(identifier: "launchCategory", actions: [action], intentIdentifiers: [], options: [])
+            let center = UNUserNotificationCenter.current()
+            center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+                // Enable or disable features based on authorization.
+                if ((error) != nil || !granted) {
+                    return
+                }
+                center.setNotificationCategories([category])
+            }
+        } else {
+            let action = UIMutableUserNotificationAction()
+            action.identifier = "launc"
+            action.title = "Launch app"
+            action.activationMode = UIUserNotificationActivationMode.foreground
+            action.isAuthenticationRequired = false
+            action.isDestructive = true
+
+            let category = UIMutableUserNotificationCategory()
+            category.identifier = "launchCategory"
+            category.setActions([action], for: UIUserNotificationActionContext.minimal)
+            category.setActions([action], for: UIUserNotificationActionContext.default)
+
+            let settings = UIUserNotificationSettings(types: UIUserNotificationType.alert, categories: [category])
+            application.registerUserNotificationSettings(settings);
+        }
+        
+    }
 
 }
 
