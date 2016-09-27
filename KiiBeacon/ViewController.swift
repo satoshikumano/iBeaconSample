@@ -18,7 +18,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var proximityText: UITextField!
 
     private let locationManager: CLLocationManager = CLLocationManager()
-    private let uuid:UUID! = UUID(uuidString: "48534442-4C45-4144-80C0-1800FFFFFFFF")!
+    //private let uuid:UUID! = UUID(uuidString: "48534442-4C45-4144-80C0-1800FFFFFFFF")!
+    private let uuid:UUID! = UUID(uuidString: "48534442-4C45-4144-80C0-1800FFFFFFF0")!
     private var region:CLBeaconRegion? = nil
 
     override func viewDidLoad() {
@@ -149,14 +150,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         print ("Determined state: \(state.rawValue)")
         switch (state) {
         case CLRegionState.inside:
+            print ("inside")
+            sendNotification(title: "近いです。", body: "アプリを開く")
             proximityState.selectedSegmentIndex = 0
             manager.startRangingBeacons(in: region as! CLBeaconRegion)
             break;
         case CLRegionState.outside:
+            print ("outside")
+            sendNotification(title: "立ち去りました。", body: "アプリを開く")
             proximityState.selectedSegmentIndex = 1
             manager.stopRangingBeacons(in: region as! CLBeaconRegion)
             break;
         case CLRegionState.unknown:
+            print ("unknown")
             proximityState.selectedSegmentIndex = 1
             manager.stopRangingBeacons(in: region as! CLBeaconRegion)
             break;
@@ -170,14 +176,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        sendNotification(title: "立ち去りました。", body: "アプリを開く")
         proximityState.selectedSegmentIndex = 1
         proximityText.text = "---"
         print("Exit region: " + region.identifier)
     }
 
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        sendNotification(title: "近いです。", body: "アプリを開く")
         proximityState.selectedSegmentIndex = 0
         manager.startRangingBeacons(in: region as! CLBeaconRegion)
         print("Enter region: " + region.identifier)

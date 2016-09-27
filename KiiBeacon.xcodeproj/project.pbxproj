@@ -116,6 +116,14 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = N5QLD3RVE2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -320,6 +328,7 @@
 				745C3AE91D927242006435F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
