@@ -55,6 +55,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        locationManager.stopRangingBeacons(in: region!)
+        super.viewWillDisappear(animated)
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
