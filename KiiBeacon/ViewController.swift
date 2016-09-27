@@ -18,17 +18,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var proximityText: UITextField!
 
     private let locationManager: CLLocationManager = CLLocationManager()
-    //private let uuid:UUID! = UUID(uuidString: "48534442-4C45-4144-80C0-1800FFFFFFFF")!
-    private let uuid:UUID! = UUID(uuidString: "48534442-4C45-4144-80C0-1800FFFFFFF0")!
     private var region:CLBeaconRegion? = nil
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        locationManager.delegate = self
+    func initRegion() {
+        let beaconUUID:String = UserDefaults.standard.value(forKey: "beaconUUID") as! String
+        print("beacon UUID: \(beaconUUID)")
+        let uuid:UUID = UUID(uuidString: beaconUUID)!;
+
         region = CLBeaconRegion(proximityUUID: uuid, identifier: "Beacon Test")
         region!.notifyEntryStateOnDisplay = false
         region!.notifyOnEntry = true
         region!.notifyOnExit = true
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        locationManager.delegate = self
+        initRegion()
 
         // Don't allow to switch.
         proximityState.isUserInteractionEnabled = false

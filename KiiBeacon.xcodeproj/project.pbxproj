@@ -14,6 +14,7 @@
 		745C3AE31D927242006435F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 745C3AE11D927242006435F7 /* LaunchScreen.storyboard */; };
 		745C3AEC1D9285C2006435F7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 745C3AEB1D9285C2006435F7 /* CoreLocation.framework */; };
 		745C3AF01D9289B5006435F7 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 745C3AEE1D9289B5006435F7 /* UserNotifications.framework */; };
+		746BC1521D9A6630009DDE1E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 746BC1511D9A6630009DDE1E /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		745C3AEB1D9285C2006435F7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		745C3AED1D9289B5006435F7 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		745C3AEE1D9289B5006435F7 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		746BC1511D9A6630009DDE1E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ../Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 		745C3AD71D927242006435F7 /* KiiBeacon */ = {
 			isa = PBXGroup;
 			children = (
+				746BC1511D9A6630009DDE1E /* Settings.bundle */,
 				745C3AD81D927242006435F7 /* AppDelegate.swift */,
 				745C3ADA1D927242006435F7 /* ViewController.swift */,
 				745C3ADC1D927242006435F7 /* Main.storyboard */,
@@ -150,6 +153,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				746BC1521D9A6630009DDE1E /* Settings.bundle in Resources */,
 				745C3AE31D927242006435F7 /* LaunchScreen.storyboard in Resources */,
 				745C3AE01D927242006435F7 /* Assets.xcassets in Resources */,
 				745C3ADE1D927242006435F7 /* Main.storyboard in Resources */,
