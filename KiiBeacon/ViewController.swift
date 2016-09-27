@@ -177,13 +177,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         switch (state) {
         case CLRegionState.inside:
             print ("inside")
-            sendNotification(title: "近いです。", body: "アプリを開く")
             proximityState.selectedSegmentIndex = 0
             startRangingBeacon()
             break;
         case CLRegionState.outside:
             print ("outside")
-            sendNotification(title: "立ち去りました。", body: "アプリを開く")
             proximityState.selectedSegmentIndex = 1
             stopRangingBeacon()
             break;
@@ -202,12 +200,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        sendNotification(title: "立ち去りました。", body: "アプリを開く")
         proximityState.selectedSegmentIndex = 1
         proximityText.text = "---"
         print("Exit region: " + region.identifier)
     }
 
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        sendNotification(title: "近いです。", body: "アプリを開く")
         proximityState.selectedSegmentIndex = 0
         manager.startRangingBeacons(in: region as! CLBeaconRegion)
         print("Enter region: " + region.identifier)
