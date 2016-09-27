@@ -19,6 +19,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     private let locationManager: CLLocationManager = CLLocationManager()
     private var region:CLBeaconRegion? = nil
+    private var unkownRangeCont:Int64 = 0;
 
     func initRegion() {
         let beaconUUID:String = UserDefaults.standard.value(forKey: "beaconUUID") as! String
@@ -56,7 +57,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        locationManager.stopRangingBeacons(in: region!)
+        stopRangingBeacon()
         super.viewWillDisappear(animated)
     }
 
@@ -87,6 +88,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     private func startMonitoring(manager:CLLocationManager) {
         manager.startMonitoring(for: region!)
+    }
+
+    private func startRangingBeacon() {
+        unkownRangeCont = 0;
+        locationManager.startRangingBeacons(in: region!)
+    }
+
+    private func stopRangingBeacon() {
+        unkownRangeCont = 0;
+        locationManager.stopRangingBeacons(in: region!)
     }
 
     func sendNotification(title:String, body:String) {
@@ -138,15 +149,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             let proximity = beacons[0].proximity
             switch (proximity) {
             case CLProximity.unknown:
+                unkownRangeCont += 1
                 proximityText.text = "unknown"
                 break;
             case CLProximity.far:
+                unkownRangeCont = 0
                 proximityText.text = "far"
                 break;
             case CLProximity.near:
+                unkownRangeCont = 0
                 proximityText.text = "near"
                 break;
             case CLProximity.immediate:
+                unkownRangeCont = 0
                 proximityText.text = "immediate"
                 break;
             }
@@ -164,18 +179,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             print ("inside")
             sendNotification(title: "近いです。", body: "アプリを開く")
             proximityState.selectedSegmentIndex = 0
-            manager.startRangingBeacons(in: region as! CLBeaconRegion)
+            startRangingBeacon()
             break;
         case CLRegionState.outside:
             print ("outside")
             sendNotification(title: "立ち去りました。", body: "アプリを開く")
             proximityState.selectedSegmentIndex = 1
-            manager.stopRangingBeacons(in: region as! CLBeaconRegion)
+            stopRangingBeacon()
             break;
         case CLRegionState.unknown:
             print ("unknown")
             proximityState.selectedSegmentIndex = 1
-            manager.stopRangingBeacons(in: region as! CLBeaconRegion)
+            stopRangingBeacon()
             break;
         }
     }
