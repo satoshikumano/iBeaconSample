@@ -21,8 +21,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     private let uuid:UUID! = UUID(uuidString: "48534442-4C45-4144-80C0-1800FFFFFFFF")!
     private var region:CLBeaconRegion? = nil
 
-    private var isRanging:Bool = false
-
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
