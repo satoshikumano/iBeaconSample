@@ -32,6 +32,18 @@
 			<key>DefaultValue</key>
 			<string>48534442-4C45-4144-80C0-1800FFFFFFFF</string>
 		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Unknown Rangeを無視する回数</string>
+			<key>Key</key>
+			<string>unknownRangeIgnoreCount</string>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>DefaultValue</key>
+			<string>5</string>
+		</dict>
 	</array>
 </dict>
 </plist>

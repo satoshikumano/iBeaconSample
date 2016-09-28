@@ -14,7 +14,7 @@
 		745C3AE31D927242006435F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 745C3AE11D927242006435F7 /* LaunchScreen.storyboard */; };
 		745C3AEC1D9285C2006435F7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 745C3AEB1D9285C2006435F7 /* CoreLocation.framework */; };
 		745C3AF01D9289B5006435F7 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 745C3AEE1D9289B5006435F7 /* UserNotifications.framework */; };
-		745CA7451D9A6F1F000AA440 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 745CA7441D9A6F1F000AA440 /* Settings.bundle */; };
+		745CA7461D9B6C99000AA440 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 745CA7441D9A6F1F000AA440 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -153,7 +153,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				745CA7451D9A6F1F000AA440 /* Settings.bundle in Resources */,
+				745CA7461D9B6C99000AA440 /* Settings.bundle in Resources */,
 				745C3AE31D927242006435F7 /* LaunchScreen.storyboard in Resources */,
 				745C3AE01D927242006435F7 /* Assets.xcassets in Resources */,
 				745C3ADE1D927242006435F7 /* Main.storyboard in Resources */,

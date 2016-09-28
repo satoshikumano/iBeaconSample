@@ -19,7 +19,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     private let locationManager: CLLocationManager = CLLocationManager()
     private var region:CLBeaconRegion? = nil
-    private var unkownRangeCont:Int64 = 0;
+    private var unknownRangeCont:Int = 0;
+    private var unknownRangeIgnoreCount:Int = 5;
+
+    // SettingBundleに設定したDefault値はUserDefaultsから取れない。アホか？
+    func initSettings() {
+        var appDefaults = Dictionary<String, Any>()
+        appDefaults["beaconUUID"] = "48534442-4C45-4144-80C0-1800FFFFFFFF"
+        appDefaults["unknownRangeIgnoreCount"] = "5"
+
+        UserDefaults.standard.register(defaults: appDefaults)
+        UserDefaults.standard.synchronize()
+    }
 
     func initRegion() {
         let beaconUUID:String = UserDefaults.standard.value(forKey: "beaconUUID") as! String
@@ -32,28 +43,43 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         region!.notifyOnExit = true
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        locationManager.delegate = self
-        initRegion()
-
-        // Don't allow to switch.
-        proximityState.isUserInteractionEnabled = false
-
-        let status = CLLocationManager.authorizationStatus()
-        if (status != CLAuthorizationStatus.authorizedAlways) {
-            locationManager.requestAlwaysAuthorization()
-        } else {
-            print ("Already authorized. start monitoring");
-            startMonitoring(manager: locationManager);
-            locationManager.requestState(for: region!)
+    func setUnkownRangeIgnoreCount() {
+        let unknownRangeIgnoreCountStr = UserDefaults.standard.value(forKey: "unknownRangeIgnoreCount") as! String
+        Int(unknownRangeIgnoreCountStr).map { (w) in
+            unknownRangeIgnoreCount = w
         }
+    }
+
+    func startMonitoringIfAllowed() {
         if (notificationSwitch.selectedSegmentIndex == 0) {
-            locationManager.requestState(for: region!)
+            let status = CLLocationManager.authorizationStatus()
+            if (status != CLAuthorizationStatus.authorizedAlways) {
+                locationManager.requestAlwaysAuthorization()
+            } else {
+                print ("Already authorized. start monitoring");
+                startMonitoring(manager: locationManager);
+            }
         } else {
+            stopMonitoring(manager: locationManager)
             proximityState.selectedSegmentIndex = 1
             proximityText.text = "---"
         }
+    }
+
+    internal func onLoad() {
+        initRegion()
+        setUnkownRangeIgnoreCount()
+        startMonitoringIfAllowed()
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        locationManager.delegate = self
+        ((UIApplication.shared.delegate) as! AppDelegate).viewController = self
+
+        initSettings()
+        onLoad()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -83,20 +109,30 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
 
     private func stopMonitoring(manager:CLLocationManager) {
-        manager.stopMonitoring(for: region!)
+        for r in locationManager.monitoredRegions {
+            manager.stopMonitoring(for: r)
+        }
     }
 
     private func startMonitoring(manager:CLLocationManager) {
+        initRegion()
+        for r in manager.monitoredRegions {
+            let beaconRegion:CLBeaconRegion = r as! CLBeaconRegion
+            if (beaconRegion.proximityUUID != region?.proximityUUID) {
+                manager.stopMonitoring(for: beaconRegion)
+            }
+        }
         manager.startMonitoring(for: region!)
+        manager.requestState(for: region!)
     }
 
     private func startRangingBeacon() {
-        unkownRangeCont = 0;
+        unknownRangeCont = 0;
         locationManager.startRangingBeacons(in: region!)
     }
 
     private func stopRangingBeacon() {
-        unkownRangeCont = 0;
+        unknownRangeCont = 0;
         locationManager.stopRangingBeacons(in: region!)
     }
 
@@ -149,19 +185,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             let proximity = beacons[0].proximity
             switch (proximity) {
             case CLProximity.unknown:
-                unkownRangeCont += 1
+                unknownRangeCont += 1
                 proximityText.text = "unknown"
                 break;
             case CLProximity.far:
-                unkownRangeCont = 0
+                unknownRangeCont = 0
                 proximityText.text = "far"
                 break;
             case CLProximity.near:
-                unkownRangeCont = 0
+                unknownRangeCont = 0
                 proximityText.text = "near"
                 break;
             case CLProximity.immediate:
-                unkownRangeCont = 0
+                unknownRangeCont = 0
                 proximityText.text = "immediate"
                 break;
             }
@@ -183,11 +219,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         case CLRegionState.outside:
             print ("outside")
             proximityState.selectedSegmentIndex = 1
+            proximityText.text = "---"
             stopRangingBeacon()
             break;
         case CLRegionState.unknown:
             print ("unknown")
             proximityState.selectedSegmentIndex = 1
+            proximityText.text = "---"
             stopRangingBeacon()
             break;
         }
@@ -212,5 +250,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         manager.startRangingBeacons(in: region as! CLBeaconRegion)
         print("Enter region: " + region.identifier)
     }
+
 }
 
