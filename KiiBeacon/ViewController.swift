@@ -102,6 +102,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 startMonitoring(manager: locationManager);
             }
         } else { // Turned off.
+            locationManager.stopRangingBeacons(in: region!)
             stopMonitoring(manager: locationManager)
             proximityState.selectedSegmentIndex = 1
             proximityText.text = "---"
