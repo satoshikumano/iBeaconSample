@@ -187,7 +187,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             switch (proximity) {
             case CLProximity.unknown:
                 unknownRangeCont += 1
-                proximityText.text = "unknown"
+                if (unknownRangeCont > unknownRangeIgnoreCount) {
+                    unknownRangeCont = 0
+                    proximityText.text = "unknown"
+                }
                 break;
             case CLProximity.far:
                 unknownRangeCont = 0
