@@ -8,6 +8,7 @@
 import UIKit
 import CoreLocation
 import UserNotifications
+import KiiSDK
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
 
@@ -21,6 +22,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     private var region:CLBeaconRegion? = nil
     private var unknownRangeCont:Int = 0;
     private var unknownRangeIgnoreCount:Int = 5;
+    private var beaconUUID:String?
 
     // SettingBundleに設定したDefault値はUserDefaultsから取れない。アホか？
     func initSettings() {
@@ -33,9 +35,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
 
     func initRegion() {
-        let beaconUUID:String = UserDefaults.standard.value(forKey: "beaconUUID") as! String
+        beaconUUID = UserDefaults.standard.value(forKey: "beaconUUID") as? String
         print("beacon UUID: \(beaconUUID)")
-        let uuid:UUID = UUID(uuidString: beaconUUID)!;
+        let uuid:UUID = UUID(uuidString: beaconUUID!)!;
 
         region = CLBeaconRegion(proximityUUID: uuid, identifier: "Beacon Test")
         region!.notifyEntryStateOnDisplay = false
@@ -248,11 +250,35 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         print("Exit region: " + region.identifier)
     }
 
+    private func loadLatestInfoFromKii(callback:@escaping (String?, String?)->(Void)){
+        if (beaconUUID != nil) {
+            let bucket:KiiBucket = Kii.bucket(withName: beaconUUID!)
+            let object:KiiObject = bucket.createObject(withID: "latestInfo")
+            object.refresh({ (object:KiiObject, error:Error?) in
+                let body:String? = object.getForKey("body") as? String
+                let title:String? = object.getForKey("title") as? String
+                callback(title, body)
+            })
+        } else {
+            callback(nil, nil)
+        }
+    }
+
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        sendNotification(title: "近いです。", body: "アプリを開く")
-        proximityState.selectedSegmentIndex = 0
-        manager.startRangingBeacons(in: region as! CLBeaconRegion)
-        print("Enter region: " + region.identifier)
+        loadLatestInfoFromKii { (title:String?, body:String?) -> (Void) in
+            var bodyDisp:String = "アプリを開く"
+            var titleDisp:String = "ファミマ赤坂店"
+            if (title != nil) {
+                titleDisp = title!
+            }
+            if (body != nil) {
+                bodyDisp = body!
+            }
+            self.sendNotification(title: titleDisp, body: bodyDisp)
+            self.proximityState.selectedSegmentIndex = 0
+            manager.startRangingBeacons(in: region as! CLBeaconRegion)
+            print("Enter region: " + region.identifier)
+        }
     }
 
 }
