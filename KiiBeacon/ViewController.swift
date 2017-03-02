@@ -24,7 +24,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     private var unknownRangeIgnoreCount:Int = 5;
     private var beaconUUID:String?
 
-    // SettingBundleに設定したDefault値はUserDefaultsから取れない。アホか？
+    // It is not possible to get values in SettingBundle from UserDefaults.
     func initSettings() {
         var appDefaults = Dictionary<String, Any>()
         appDefaults["beaconUUID"] = "48534442-4C45-4144-80C0-1800FFFFFFFF"
@@ -244,7 +244,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        sendNotification(title: "立ち去りました。", body: "アプリを開く")
+        sendNotification(title: "Away from the beacon", body: "Open app")
         proximityState.selectedSegmentIndex = 1
         proximityText.text = "---"
         print("Exit region: " + region.identifier)
@@ -266,8 +266,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         loadLatestInfoFromKii { (title:String?, body:String?) -> (Void) in
-            var bodyDisp:String = "アプリを開く"
-            var titleDisp:String = "ファミマ赤坂店"
+            var bodyDisp:String = "Open app."
+            var titleDisp:String = "Family mart Akasaka"
             if (title != nil) {
                 titleDisp = title!
             }
