@@ -8,11 +8,25 @@ It can be used for store advertizement, etc.
 
 ## Setup
 
+- Create your Kii Cloud application.
+
 - Edit AppDelegate.swift and replace appID, appKey and appSite with your
 application's.
 
 - Edit ViewController.swift and replace defaultBeaconUUID with your beacon's
 ID.
+
+- Create object stores information to show.
+
+  - Create app scope bucket with the name same as beacon UUID.
+  - Create object with the ID 'latestInfo' with following properties.
+
+```json
+{
+  "body" : "Notification body",
+  "title" : "Notification title"
+}
+```
 
 ## Build
 ```shell
