@@ -17,8 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     internal var viewController: ViewController?
 
     // Replace with your apps ID, Key and Site.
-    private let appID = "c14a0111"
-    private let appKey = "ad3b6d88d3e784355e826da9af96cec2"
+    private let appID = "{Your App ID}"
+    private let appKey = "{Your App Key}"
     private let appSite = KiiSite.JP
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
