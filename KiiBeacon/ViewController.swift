@@ -24,10 +24,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     private var unknownRangeIgnoreCount:Int = 5;
     private var beaconUUID:String?
 
+    // Repace with you beacon ID.
+    private let defaultBeaconUUID = "48534442-4C45-4144-80C0-1800FFFFFFFF"
     // It is not possible to get values in SettingBundle from UserDefaults.
     func initSettings() {
         var appDefaults = Dictionary<String, Any>()
-        appDefaults["beaconUUID"] = "48534442-4C45-4144-80C0-1800FFFFFFFF"
+        appDefaults["beaconUUID"] = defaultBeaconUUID
         appDefaults["unknownRangeIgnoreCount"] = "5"
 
         UserDefaults.standard.register(defaults: appDefaults)

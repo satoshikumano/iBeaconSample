@@ -16,10 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     internal var viewController: ViewController?
 
+    // Replace with your apps ID, Key and Site.
+    private let appID = "c14a0111"
+    private let appKey = "ad3b6d88d3e784355e826da9af96cec2"
+    private let appSite = KiiSite.JP
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         registerNotification(application: application)
-        Kii.begin(withID: "c14a0111", andKey: "ad3b6d88d3e784355e826da9af96cec2", andSite: KiiSite.JP)
+        Kii.begin(withID: appID, andKey: appKey, andSite: appSite)
         return true
     }
 
