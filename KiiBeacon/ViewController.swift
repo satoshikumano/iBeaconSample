@@ -38,7 +38,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     func initRegion() {
         beaconUUID = UserDefaults.standard.value(forKey: "beaconUUID") as? String
-        print("beacon UUID: \(beaconUUID)")
+        print("beacon UUID: \(String(describing: beaconUUID))")
         let uuid:UUID = UUID(uuidString: beaconUUID!)!;
 
         region = CLBeaconRegion(proximityUUID: uuid, identifier: "Beacon Test")
@@ -268,8 +268,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         loadLatestInfoFromKii { (title:String?, body:String?) -> (Void) in
-            var bodyDisp:String = "Open app."
-            var titleDisp:String = "Family mart Akasaka"
+            var bodyDisp:String = "お知らせ"
+            var titleDisp:String = "通知"
             if (title != nil) {
                 titleDisp = title!
             }
