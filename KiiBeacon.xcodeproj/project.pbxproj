@@ -136,11 +136,14 @@
 				TargetAttributes = {
 					745C3AD41D927242006435F7 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 786TETA5CX;
+						DevelopmentTeam = N5QLD3RVE2;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
 							};
 							com.apple.Push = {
 								enabled = 0;
@@ -285,6 +288,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = N5QLD3RVE2;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -335,6 +339,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = N5QLD3RVE2;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -360,14 +365,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 786TETA5CX;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = N5QLD3RVE2;
 				INFOPLIST_FILE = KiiBeacon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kii.hellokii.sk;
+				PRODUCT_BUNDLE_IDENTIFIER = Kii.KiiBeacon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "07e67737-df20-4251-b832-c3262449c6f4";
-				PROVISIONING_PROFILE_SPECIFIER = "Hello Kii Dev";
+				PROVISIONING_PROFILE = "c858e1b8-02ed-4a8c-ae1c-963cca795877";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS Ad Hoc: Kii.KiiBeacon";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -379,13 +384,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 786TETA5CX;
+				DEVELOPMENT_TEAM = N5QLD3RVE2;
 				INFOPLIST_FILE = KiiBeacon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kii.hellokii.sk;
+				PRODUCT_BUNDLE_IDENTIFIER = Kii.KiiBeacon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6a1e7bf9-e0c0-4854-895f-d0edb3f998ae";
-				PROVISIONING_PROFILE_SPECIFIER = "Hello Kii Dist";
+				PROVISIONING_PROFILE = "93c44ed3-9323-4490-bc28-c8fc723accba";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS Ad Hoc: Kii.KiiBeacon";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
