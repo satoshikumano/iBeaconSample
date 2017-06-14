@@ -11,7 +11,7 @@ import UserNotifications
 import KiiSDK
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
     internal var viewController: ViewController?
@@ -56,6 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let action = UNNotificationAction(identifier: "launch", title: "Launch app", options: [UNNotificationActionOptions.foreground])
             let category = UNNotificationCategory(identifier: "launchCategory", actions: [action], intentIdentifiers: [], options: [])
             let center = UNUserNotificationCenter.current()
+            center.delegate = self
             center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
                 // Enable or disable features based on authorization.
                 if ((error) != nil || !granted) {
@@ -80,6 +81,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(settings);
         }
         
+    }
+
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
+    {
+        completionHandler([.alert, .sound])
     }
 
 }
